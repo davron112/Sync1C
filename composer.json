@@ -1,5 +1,5 @@
 {
-    "name": "davron112/Sync1C",
+    "name": "davron112/laravel-1c",
     "type": "library",
     "description": "Library to integration with 1C API",
     "license": "MIT",
