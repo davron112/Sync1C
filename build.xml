@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="name-of-project" default="build">
+    <!-- By default, we assume all tools to be on the $PATH -->
+    <!-- <property name="toolsdir" value=""/>-->
+
+    <!-- Uncomment the following when the tools are in ${basedir}/vendor/bin -->
+    <property name="toolsdir" value="${basedir}/vendor/bin/"/>
+    <property name="composer" value="${basedir}/build/composer.phar"/>
+    <property name="artisan" value="${basedir}/artisan"/>
+    <property name="php" value="php"/>
+
+    <target name="build"
+            depends="composer,prepare,lint,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit-functional,phpunit-integrational"
+            description="">
+    </target>
+
+    <target name="build-parallel"
+            depends="prepare,lint,tools-parallel"
+            description=""/>
+
+    <target name="tools-parallel" description="Run tools in parallel">
+        <parallel threadCount="2">
+            <sequential>
+                <antcall target="phpmd-ci"/>
+            </sequential>
+            <antcall target="phpcpd-ci"/>
+            <antcall target="phpcs-ci"/>
+        </parallel>
+    </target>
+
+    <target name="clean"
+            unless="clean.done"
+            description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete file="${basedir}/.env"/>
+        <property name="clean.done" value="true"/>
+    </target>
+
+    <target name="prepare"
+            unless="prepare.done"
+            depends="clean"
+            description="Prepare for build">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <copy file="${basedir}/.env.jenkins" tofile="${basedir}/.env"/>
+        <property name="prepare.done" value="true"/>
+    </target>
+
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true">
+            <arg value="-l"/>
+
+            <fileset dir="${basedir}/src">
+                <include name="**/*.php"/>
+                <modified/>
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phpmd"
+            description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsdir}phpmd" resultproperty="phpmd.result">
+            <arg path="${basedir}/src"/>
+            <arg value="text"/>
+            <arg value="codesize"/>
+        </exec>
+    </target>
+
+    <target name="phpmd-ci"
+            depends="prepare"
+            description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsdir}phpmd">
+            <arg path="${basedir}/src"/>
+            <arg value="xml"/>
+            <arg value="codesize"/>
+            <arg value="--reportfile"/>
+            <arg path="${basedir}/build/logs/pmd.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpcs"
+            description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsdir}phpcs" resultproperty="phpcs.result">
+            <arg value="--standard=PSR2"/>
+            <arg value="--extensions=php"/>
+            <arg value="--ignore='*/database/*, */migrations/*, */views/*, autoload.php'"/>
+            <arg path="${basedir}/src"/>
+            <arg path="${basedir}/tests"/>
+        </exec>
+    </target>
+
+    <target name="phpcs-ci"
+            depends="prepare"
+            description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsdir}phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg value="--extensions=php"/>
+            <arg value="--ignore='*/database/*, */migrations/*, */views/*, autoload.php'"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd"
+            description="Find duplicate code using PHPCPD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsdir}phpcpd" resultproperty="phpcpd.result">
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd-ci"
+            depends="prepare"
+            description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsdir}phpcpd">
+            <arg value="--log-pmd"/>
+            <arg path="${basedir}/build/logs/pmd-cpd.xml"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+
+    <target name="composer-check" depends="prepare">
+        <available file="${composer}" property="composer.present"/>
+    </target>
+
+    <target name="composer-download" depends="composer-check" unless="composer.present">
+        <property name="composer.noselfupdate" value="true"/>
+        <get src="https://getcomposer.org/composer.phar" dest="${composer}"/>
+    </target>
+
+    <target name="composer-selfupdate" depends="composer-download" unless="composer.noselfupdate">
+        <exec executable="${php}">
+            <arg value="${composer}"/>
+            <arg value="self-update"/>
+            <arg value="--quiet"/>
+        </exec>
+    </target>
+
+    <target name="composer" depends="composer-selfupdate" description="Run composer update">
+        <exec executable="${php}" resultproperty="composer.result">
+            <arg value="${composer}"/>
+            <arg value="update"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-functional"
+            unless="phpunit.done"
+            depends="prepare"
+            description="Run unit tests with PHPUnit">
+        <exec executable="${toolsdir}phpunit" resultproperty="result.phpunit-functional" taskname="phpunit-functional" failonerror="true">
+            <arg value="--configuration"/>
+            <arg path="${basedir}/phpunit.functional.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-integrational"
+            unless="phpunit.done"
+            depends="prepare"
+            description="Run unit tests with PHPUnit">
+        <exec executable="${toolsdir}phpunit" resultproperty="result.phpunit-integrational" taskname="phpunit-integrational" failonerror="true">
+            <arg value="--configuration"/>
+            <arg path="${basedir}/phpunit.integrational.xml"/>
+        </exec>
+    </target>
+
+</project>
+
