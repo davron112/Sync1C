@@ -98,35 +98,6 @@ abstract class BaseService
     }
 
     /**
-     * Get request token from B4M.
-     *
-     * @return string|null
-     */
-    public function login(): ?string
-    {
-        $data = $this->requestService->makePostRequest('login', $this->credentials);
-        if (!empty($data['Ticket'])) {
-            return $data['Ticket'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Get an auth token.
-     *
-     * @return string
-     */
-    protected function getToken()
-    {
-        if (empty($this->token)) {
-            $this->token = $this->login();
-        }
-
-        return $this->token;
-    }
-
-    /**
      * Get an "object" array from a request result.
      *
      * @param array $response request response
@@ -137,20 +108,6 @@ abstract class BaseService
     {
         $this->response = $response;
         return isset($response)? $response : false;
-    }
-
-    /**
-     * Get an item ID.
-     *
-     * @param array $response
-     *
-     * @return mixed
-     */
-    protected function getObjectId($response)
-    {
-        if ($this->checkStatus($response)) {
-            return isset($response['Object']['Id'])? intval($response['Object']['Id']) : false;
-        }
     }
 
     /**
