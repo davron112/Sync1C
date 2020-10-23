@@ -2,23 +2,17 @@
 
 namespace Davron112\Console\Commands;
 
-use Illuminate\Log\Logger;
+
 use Illuminate\Console\Command;
 use Davron112\Sync1C\Sync1CServiceInterface;
 use Davron112\Jobs\Contracts\ProductSynchronization as SynchronizationJob;
 
 /**
  * Class ProductSynchronization
- * @package namespace Davron112\Synchronizations\Console\Commands
+ * @package namespace Davron112\Console\Commands
  */
 class ProductSynchronization extends Command
 {
-    /**
-     * Logger
-     *
-     * @var \Illuminate\Log\Logger
-     */
-    protected $log;
 
     /**
      * The name and signature of the console command.
@@ -43,13 +37,11 @@ class ProductSynchronization extends Command
      * ProductSynchronization constructor.
      *
      * @param Sync1CServiceInterface $service
-     * @param Logger $log
      */
-    public function __construct(Sync1CServiceInterface $service, Logger $log)
+    public function __construct(Sync1CServiceInterface $service)
     {
+        var_dump(21312312312);
         parent::__construct();
-
-        $this->log             = $log;
         $this->Sync1CService = $service;
     }
 
@@ -60,6 +52,8 @@ class ProductSynchronization extends Command
      */
     public function handle()
     {
+        var_dump(21312312312);
+
         $job = app(SynchronizationJob::class, [$this->Sync1CService]);
         app('Illuminate\Bus\Dispatcher')->dispatch($job);
     }

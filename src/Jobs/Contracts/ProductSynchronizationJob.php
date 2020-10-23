@@ -3,10 +3,10 @@
 namespace Davron112\Jobs\Contracts;
 
 /**
- * Interface ProductSynchronization
+ * Interface ProductSynchronizationJob
  * @package Davron112\Synchronizations\Jobs\Contracts
  */
-interface ProductSynchronization
+interface ProductSynchronizationJob
 {
     /**
      * Handler.

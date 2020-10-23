@@ -7,10 +7,10 @@ use Davron112\Sync1C\Services\ProductService;
 use Davron112\Jobs\Contracts\ProductSynchronization as ProductSynchronizationInterface;
 
 /**
- * Class ProductSynchronization
+ * Class ProductSynchronizationJob
  * @package namespace Davron112\Synchronizations\Jobs
  */
-class ProductSynchronization extends BaseSynchronization implements ProductSynchronizationInterface
+class ProductSynchronizationJob extends BaseSynchronization implements ProductSynchronizationInterface
 {
     /**
      * Product Service

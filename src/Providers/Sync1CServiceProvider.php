@@ -2,7 +2,10 @@
 
 namespace Davron112\Sync1C\Providers;
 
+use Davron112\Jobs\ProductSynchronizationJob;
 use Illuminate\Support\ServiceProvider;
+use Davron112\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationJobInterface;
+
 
 class Sync1CServiceProvider extends ServiceProvider
 {
@@ -36,6 +39,6 @@ class Sync1CServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ProductSynchronizationJobInterface::class, ProductSynchronizationJob::class);
     }
 }
