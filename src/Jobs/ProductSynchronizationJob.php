@@ -4,7 +4,7 @@ namespace Davron112\Synchronizations\Jobs;
 
 use Davron112\Synchronizations\SynchronizationServiceInterface;
 use Davron112\Synchronizations\Services\ProductService;
-use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronization as ProductSynchronizationInterface;
+use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationInterface;
 
 /**
  * Class ProductSynchronizationJob

@@ -4,7 +4,7 @@ namespace Davron112\Synchronizations\Providers;
 
 use Davron112\Synchronizations\Jobs\ProductSynchronizationJob;
 use Illuminate\Support\ServiceProvider;
-use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationJobInterface;
+//use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationJobInterface;
 
 
 class SynchronizationServiceProvider extends ServiceProvider
@@ -17,7 +17,7 @@ class SynchronizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/synchronizations-1c.php' => config_path('synchronizations-1c.php')
+            __DIR__ . '/../../config/synchronization-1c.php' => config_path('synchronization-1c.php')
         ], 'config');
 
         $this->app->bind('Davron112\Synchronizations\SynchronizationServiceInterface', function ($app) {
