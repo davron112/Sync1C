@@ -1,13 +1,13 @@
 <?php
 
-namespace Davron112\Sync1C\Services;
+namespace Davron112\Synchronizations\Services;
 
-use Davron112\Sync1C\Services\Interfaces\GetInterface;
-use Davron112\Sync1C\Services\Interfaces\GetAllInterface;
+use Davron112\Synchronizations\Services\Interfaces\GetInterface;
+use Davron112\Synchronizations\Services\Interfaces\GetAllInterface;
 
 /**
  * Class ProductService
- * @package namespace Davron112\Sync1C\Services;
+ * @package namespace Davron112\Synchronizations\Services;
  */
 class ProductService extends BaseService implements GetAllInterface, GetInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Davron112\Jobs\Contracts;
+namespace Davron112\Synchronizations\Jobs\Contracts;
 
 /**
  * Interface ProductSynchronizationJob

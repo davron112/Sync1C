@@ -1,15 +1,15 @@
 <?php
 
-namespace Davron112\Console\Commands;
+namespace Davron112\Synchronizations\Console\Commands;
 
 
 use Illuminate\Console\Command;
-use Davron112\Sync1C\Sync1CServiceInterface;
-use Davron112\Jobs\Contracts\ProductSynchronization as SynchronizationJob;
+use Davron112\Synchronizations\SynchronizationServiceInterface;
+use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronizationJob as SynchronizationJob;
 
 /**
  * Class ProductSynchronization
- * @package namespace Davron112\Console\Commands
+ * @package namespace Davron112\Synchronizations\Console\Commands
  */
 class ProductSynchronization extends Command
 {
@@ -29,20 +29,20 @@ class ProductSynchronization extends Command
     protected $description = 'Update products.';
 
     /**
-     * @var Sync1CServiceInterface
+     * @var SynchronizationServiceInterface
      */
-    protected $Sync1CService;
+    protected $SynchronizationService;
 
     /**
      * ProductSynchronization constructor.
      *
-     * @param Sync1CServiceInterface $service
+     * @param SynchronizationServiceInterface $service
      */
-    public function __construct(Sync1CServiceInterface $service)
+    public function __construct(SynchronizationServiceInterface $service)
     {
         var_dump(21312312312);
         parent::__construct();
-        $this->Sync1CService = $service;
+        $this->SynchronizationService = $service;
     }
 
     /**
@@ -54,7 +54,7 @@ class ProductSynchronization extends Command
     {
         var_dump(21312312312);
 
-        $job = app(SynchronizationJob::class, [$this->Sync1CService]);
+        $job = app(SynchronizationJob::class, [$this->SynchronizationService]);
         app('Illuminate\Bus\Dispatcher')->dispatch($job);
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Davron112\Sync1C\Services;
+namespace Davron112\Synchronizations\Services;
 
-use Davron112\Sync1C\Services\Interfaces\CreateInterface;
-use Davron112\Sync1C\Services\Interfaces\UpdateInterface;
-use Davron112\Sync1C\Services\Interfaces\GetInterface;
-use Davron112\Sync1C\Services\Interfaces\GetAllInterface;
+use Davron112\Synchronizations\Services\Interfaces\CreateInterface;
+use Davron112\Synchronizations\Services\Interfaces\UpdateInterface;
+use Davron112\Synchronizations\Services\Interfaces\GetInterface;
+use Davron112\Synchronizations\Services\Interfaces\GetAllInterface;
 
 /**
  * Class ContactService
- * @package namespace Davron112\Sync1C\Services;
+ * @package namespace Davron112\Synchronizations\Services;
  */
 class ContactService extends BaseService implements CreateInterface, UpdateInterface, GetInterface, GetAllInterface
 {

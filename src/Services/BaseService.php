@@ -1,12 +1,12 @@
 <?php
 
-namespace Davron112\Sync1C\Services;
+namespace Davron112\Synchronizations\Services;
 
-use Davron112\Sync1C\Traits\CredentialsTrait;
+use Davron112\Synchronizations\Traits\CredentialsTrait;
 
 /**
  * Class BaseService
- * @package namespace Davron112\Sync1C\Services;
+ * @package namespace Davron112\Synchronizations\Services;
  */
 abstract class BaseService
 {
@@ -20,7 +20,7 @@ abstract class BaseService
     private $config;
 
     /**
-     * Response from Sync1C.
+     * Response from Synchronizations.
      *
      * @var array
      */

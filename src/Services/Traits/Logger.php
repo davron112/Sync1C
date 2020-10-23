@@ -1,12 +1,12 @@
 <?php
 
-namespace Davron112\Sync1C\Services\Traits;
+namespace Davron112\Synchronizations\Services\Traits;
 
 use GuzzleHttp\Psr7\Response;
 
 /**
  * Trait Logger
- * @package namespace Davron112\Sync1C\Services\Traits;
+ * @package namespace Davron112\Synchronizations\Services\Traits;
  */
 trait Logger
 {

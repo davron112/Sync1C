@@ -1,8 +1,8 @@
 <?php
 
-namespace Davron112\Jobs;
+namespace Davron112\Synchronizations\Jobs;
 
-use App\Jobs\Job;
+use Davron112\Synchronizations\Jobs\Job;
 
 /**
  * Class BaseSynchronization

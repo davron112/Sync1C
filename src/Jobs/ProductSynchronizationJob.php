@@ -1,10 +1,10 @@
 <?php
 
-namespace Davron112\Jobs;
+namespace Davron112\Synchronizations\Jobs;
 
-use Davron112\Sync1C\Sync1CServiceInterface;
-use Davron112\Sync1C\Services\ProductService;
-use Davron112\Jobs\Contracts\ProductSynchronization as ProductSynchronizationInterface;
+use Davron112\Synchronizations\SynchronizationServiceInterface;
+use Davron112\Synchronizations\Services\ProductService;
+use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronization as ProductSynchronizationInterface;
 
 /**
  * Class ProductSynchronizationJob
@@ -31,9 +31,9 @@ class ProductSynchronizationJob extends BaseSynchronization implements ProductSy
      *
      * ProductSynchronization constructor.
      *
-     * @param Sync1CServiceInterface $service
+     * @param SynchronizationServiceInterface $service
      */
-    public function __construct(Sync1CServiceInterface $service)
+    public function __construct(SynchronizationServiceInterface $service)
     {
         $this->service = $service->getProductService();
     }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Davron112\Sync1C\Services;
+namespace Davron112\Synchronizations\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use Davron112\Sync1C\Services\Traits\Logger;
+use Davron112\Synchronizations\Services\Traits\Logger;
 
 /**
  * Class RequestService
- * @package namespace Davron112\Sync1C\Services;
+ * @package namespace Davron112\Synchronizations\Services;
  */
 class RequestService
 {

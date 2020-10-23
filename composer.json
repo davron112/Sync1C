@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Davron112\\Sync1C\\": "src"
+            "Davron112\\Synchronizations\\": "src/"
         }
     },
     "scripts": {

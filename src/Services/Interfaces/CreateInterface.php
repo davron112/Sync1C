@@ -1,10 +1,10 @@
 <?php
 
-namespace Davron112\Sync1C\Services\Interfaces;
+namespace Davron112\Synchronizations\Services\Interfaces;
 
 /**
  * Interface CreateInterface
- * @package namespace Davron112\Sync1C\Services\Interfaces;
+ * @package namespace Davron112\Synchronizations\Services\Interfaces;
  */
 interface CreateInterface
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Davron112\Sync1C;
+namespace Davron112\Synchronizations;
 
 /**
- * Interface Sync1CServiceInterface
- * @package namespace Davron112\Sync1C;
+ * Interface SynchronizationServiceInterface
+ * @package namespace Davron112\Synchronizations;
  *
  * @method Services\OrderService         getOrderService()
  * @method Services\ContactService       getContactService()
  * @method Services\ProductService       getProductService()
  */
-interface Sync1CServiceInterface
+interface SynchronizationServiceInterface
 {
     /**
      * Set config

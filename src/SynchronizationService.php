@@ -1,20 +1,20 @@
 <?php
 
-namespace Davron112\Sync1C;
+namespace Davron112\Synchronizations;
 
 use Illuminate\Container\Container;
-use Davron112\Sync1C\Traits\CredentialsTrait;
-use Davron112\Sync1C\Services\RequestService;
+use Davron112\Synchronizations\Traits\CredentialsTrait;
+use Davron112\Synchronizations\Services\RequestService;
 
 /**
- * Class Sync1CService
- * @package namespace Davron112\Sync1C;
+ * Class SynchronizationService
+ * @package namespace Davron112\Synchronizations;
  *
  * @method Services\OrderService         getOrderService()
  * @method Services\ContactService       getContactService()
  * @method Services\ProductService getProductService()
  */
-class Sync1CService implements Sync1CServiceInterface
+class SynchronizationService implements SynchronizationServiceInterface
 {
     use CredentialsTrait;
 
@@ -103,13 +103,13 @@ class Sync1CService implements Sync1CServiceInterface
      *
      * @param string $serviceName service name
      *
-     * @return Davron112\Sync1C\Services\BaseService
+     * @return Davron112\Synchronizations\Services\BaseService
      */
     private function getService(string $serviceName)
     {
         $propName = lcfirst($serviceName);
         if (empty($this->$propName)) {
-            $service = $this->container->make('Davron112\Sync1C\Services\\'. $serviceName);
+            $service = $this->container->make('Davron112\Synchronizations\Services\\'. $serviceName);
             $service->setRequestService($this->requestService);
             $service->setConfig($this->config);
             if (!empty($this->token)) {

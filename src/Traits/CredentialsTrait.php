@@ -1,10 +1,10 @@
 <?php
 
-namespace Davron112\Sync1C\Traits;
+namespace Davron112\Synchronizations\Traits;
 
 /**
  * Trait CredentialsTrait
- * @package namespace Davron112\Sync1C\Traits;
+ * @package namespace Davron112\Synchronizations\Traits;
  */
 trait CredentialsTrait
 {
