@@ -76,34 +76,6 @@ class OrderService extends BaseService implements CreateInterface, UpdateInterfa
     }
 
     /**
-     * Approve an order.
-     *
-     * @param int $id order ID
-     *
-     * @return bool
-     */
-    public function approve($id)
-    {
-        return $this->checkStatus(
-            $this->requestService->makePutRequest($this->getUrl(implode(['order/approve/', $id])))
-        );
-    }
-
-    /**
-     * Pause an order.
-     *
-     * @param int $id order ID
-     *
-     * @return bool
-     */
-    public function pause($id)
-    {
-        return $this->checkStatus(
-            $this->requestService->makePutRequest($this->getUrl(implode(['order/pause/', $id])))
-        );
-    }
-
-    /**
      * Cancel an order.
      *
      * @param int $id order ID
@@ -114,20 +86,6 @@ class OrderService extends BaseService implements CreateInterface, UpdateInterfa
     {
         return $this->checkStatus(
             $this->requestService->makePutRequest($this->getUrl(implode(['order/cancel/', $id])))
-        );
-    }
-
-    /**
-     * Archive an order.
-     *
-     * @param int $id order ID
-     *
-     * @return bool
-     */
-    public function archive($id)
-    {
-        return $this->checkStatus(
-            $this->requestService->makePutRequest($this->getUrl(implode(['order/archive/', $id])))
         );
     }
 }

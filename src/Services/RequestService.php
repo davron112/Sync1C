@@ -85,7 +85,7 @@ class RequestService
             $content = $this->responseContent->getBody()->getContents();
             if (strlen($content) > 1) {
                 if ($json) {
-                    return is_array(json_decode($content, 1))? json_decode($content, 1) : [];
+                    return json_decode($content);
                 } else {
                     return $content;
                 }
@@ -179,18 +179,19 @@ class RequestService
         $defaultHeaders = [
             'headers' => [
                 'Content-Type' => 'application/json',
+                'Authorization' => 'Basic ' . base64_encode($this->config['auth']['user'] . ':' . $this->config['auth']['password'])
             ],
             'json'           => $data,
             'decode_content' => false,
             'http_errors'    => $this->config['show_errors_flag'],
         ];
-        $fullUrl  = $this->config['base_url'] . $url;
+        $fullUrl  = $this->config['base_url'] . $this->config['prefix'] . $url;
+
         $headers  = array_replace_recursive($defaultHeaders, $requestHeaders);
         $response = $this->client->request($method, $fullUrl, $headers, $data);
 
         $this->setResponseContent($response);
-        $this->log($this->config, $fullUrl, $method, $headers, $response);
-
+        //$this->log($this->config, $fullUrl, $method, $headers, $response);
         return $this->obtainResponseContent();
     }
 
@@ -216,8 +217,8 @@ class RequestService
         $response = $this->client->request($method, $fullUrl, $headers, $data);
 
         $this->setResponseContent($response);
-        $this->log($this->config, $fullUrl, $method, $headers, $response);
-
+        //$this->log($this->config, $fullUrl, $method, $headers, $response);
+        dd($this->obtainResponseContent());
         return $this->obtainResponseContent(false);
     }
 }

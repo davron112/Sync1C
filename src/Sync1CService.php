@@ -21,7 +21,7 @@ class Sync1CService implements Sync1CServiceInterface
     /**
      * A Request Service.
      *
-     * @var Davron112\Sync1C\Services\RequestService
+     * @var RequestService
      */
     protected $requestService;
 

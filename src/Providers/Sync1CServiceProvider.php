@@ -3,7 +3,6 @@
 namespace Davron112\Sync1C\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Cache;
 
 class Sync1CServiceProvider extends ServiceProvider
 {
@@ -15,7 +14,7 @@ class Sync1CServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/1c-sync.php' => config_path('sync1c.php')
+            __DIR__ . '/../../config/sync1c.php' => config_path('sync1c.php')
         ], 'config');
 
         $this->publishes([
@@ -26,15 +25,6 @@ class Sync1CServiceProvider extends ServiceProvider
             $config  = $app['config']['sync1c'];
             $service = $app->make('Davron112\Sync1C\Sync1CService');
             $service->setConfig($config);
-
-            if (Cache::has($config['token_cache_name'])) {
-                $token = Cache::get($config['token_cache_name']);
-            } else {
-                $token = $service->getProductService()->login();
-                Cache::put($config['token_cache_name'], $token, $config['token_cache_lifetime']);
-            }
-            $service->setToken($token);
-
             return $service;
         });
     }

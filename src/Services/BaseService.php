@@ -3,7 +3,6 @@
 namespace Davron112\Sync1C\Services;
 
 use Davron112\Sync1C\Traits\CredentialsTrait;
-use Davron112\Sync1C\Models\Response;
 
 /**
  * Class BaseService
@@ -37,7 +36,7 @@ abstract class BaseService
     /**
      * A Request Service.
      *
-     * @var Davron112\Sync1C\Services\RequestService
+     * @var RequestService
      */
     protected $requestService;
 
@@ -57,7 +56,7 @@ abstract class BaseService
     /**
      * Set a request service.
      *
-     * @param Davron112\Sync1C\Services\RequestService $requestService
+     * @param RequestService $requestService
      *
      * @return void
      */
@@ -137,7 +136,7 @@ abstract class BaseService
     protected function getObject($response)
     {
         $this->response = $response;
-        return isset($response['Object'])? $response['Object'] : false;
+        return isset($response)? $response : false;
     }
 
     /**
@@ -174,12 +173,8 @@ abstract class BaseService
      *
      * @return string
      */
-    protected function getUrl($path)
+    protected function setQuery($params = [])
     {
-        return implode('', [
-            $this->config['prefix'],
-            $path,
-            '?ticket=' . $this->getToken(),
-        ]);
+        return !empty($params) ? '?' . http_build_query($params) : '';
     }
 }

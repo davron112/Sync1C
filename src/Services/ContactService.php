@@ -63,18 +63,4 @@ class ContactService extends BaseService implements CreateInterface, UpdateInter
             $this->requestService->makeGetRequest($this->getUrl(implode(['contact/', $id])))
         );
     }
-
-    /**
-     * Get a contact by company ID.
-     *
-     * @param int $id contact ID
-     *
-     * @return bool
-     */
-    public function getByCompany($id)
-    {
-        return $this->getObject(
-            $this->requestService->makeGetRequest($this->getUrl(implode(['contact/company/', $id])))
-        );
-    }
 }

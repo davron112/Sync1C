@@ -12,14 +12,22 @@ use Davron112\Sync1C\Services\Interfaces\GetAllInterface;
 class ProductService extends BaseService implements GetAllInterface, GetInterface
 {
     /**
+     * @var string
+     */
+    protected static $listUri = 'Integration/full';
+
+    protected static $detailUri = 'Integration/info/';
+
+    protected static $changeUri = 'Integration/changed';
+
+    /**
      * Get all products.
      *
      * @return array
      */
     public function getAll()
     {
-        dd(32423423);
-        return $this->getObject($this->requestService->makeGetRequest($this->getUrl('product')));
+        return $this->getObject($this->requestService->makeGetRequest(self::$listUri));
     }
 
     /**
@@ -32,7 +40,7 @@ class ProductService extends BaseService implements GetAllInterface, GetInterfac
     public function getUpdated($time)
     {
         return $this->getObject(
-            $this->requestService->makeGetRequest($this->getUrl(implode(['product/changed/', $time])))
+            $this->requestService->makeGetRequest($this->getUrl(self::$detailUri . $time))
         );
     }
 
@@ -45,24 +53,6 @@ class ProductService extends BaseService implements GetAllInterface, GetInterfac
      */
     public function get($id)
     {
-        return $this->getObject($this->requestService->makeGetRequest($this->getUrl(implode(['product/', $id]))));
-    }
-
-    /**
-     * Get templates.
-     *
-     * @param int $time unix timestamp
-     *
-     * @return array
-     */
-    public function getTemplates($ids = false)
-    {
-        $param = false;
-        if (is_array($ids)) {
-            $param = '&id=' . implode(',', $ids);
-        }
-        return $this->getObject(
-            $this->requestService->makeGetRequest($this->getUrl('creative/templates') . $param)
-        );
+        return $this->getObject($this->requestService->makeGetRequest('Integration/full' . $id));
     }
 }
