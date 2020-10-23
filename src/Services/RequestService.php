@@ -1,14 +1,14 @@
 <?php
 
-namespace Davron112\Synchronizations\Services;
+namespace Davron112\Integration1c\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use Davron112\Synchronizations\Services\Traits\Logger;
+use Davron112\Integration1c\Services\Traits\Logger;
 
 /**
  * Class RequestService
- * @package namespace Davron112\Synchronizations\Services;
+ * @package namespace Davron112\Integration1c\Services;
  */
 class RequestService
 {
@@ -218,7 +218,6 @@ class RequestService
 
         $this->setResponseContent($response);
         //$this->log($this->config, $fullUrl, $method, $headers, $response);
-        dd($this->obtainResponseContent());
         return $this->obtainResponseContent(false);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Davron112\Synchronizations\Services;
+namespace Davron112\Integration1c\Services;
 
-use Davron112\Synchronizations\Services\Interfaces\CreateInterface;
-use Davron112\Synchronizations\Services\Interfaces\UpdateInterface;
-use Davron112\Synchronizations\Services\Interfaces\DeleteInterface;
+use Davron112\Integration1c\Services\Interfaces\CreateInterface;
+use Davron112\Integration1c\Services\Interfaces\UpdateInterface;
+use Davron112\Integration1c\Services\Interfaces\DeleteInterface;
 
 /**
  * Class OrderService
- * @package namespace Davron112\Synchronizations\Services;
+ * @package namespace Davron112\Integration1c\Services;
  */
 class OrderService extends BaseService implements CreateInterface, UpdateInterface, DeleteInterface
 {

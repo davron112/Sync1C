@@ -1,13 +1,10 @@
 <?php
 
-namespace Davron112\Synchronizations\Providers;
+namespace Davron112\Integration1c\Providers;
 
-use Davron112\Synchronizations\Jobs\ProductSynchronizationJob;
 use Illuminate\Support\ServiceProvider;
-use Davron112\Synchronizations\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationJobInterface;
 
-
-class SynchronizationServiceProvider extends ServiceProvider
+class Integration1cServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application services.
@@ -17,12 +14,12 @@ class SynchronizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/synchronization-1c.php' => config_path('synchronization-1c.php')
+            __DIR__ . '/../../config/integration-1c.php' => config_path('integration-1c.php')
         ], 'config');
 
-        $this->app->bind('Davron112\Synchronizations\SynchronizationServiceInterface', function ($app) {
-            $config  = $app['config']['synchronizations-1c'];
-            $service = $app->make('Davron112\Synchronizations\SynchronizationService');
+        $this->app->bind('Davron112\Integration1c\Integration1cInterface', function ($app) {
+            $config  = $app['config']['Integration1c-1c'];
+            $service = $app->make('Davron112\Integration1c\Integration1cService');
             $service->setConfig($config);
             return $service;
         });
