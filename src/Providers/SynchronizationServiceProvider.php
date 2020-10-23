@@ -17,12 +17,8 @@ class SynchronizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/synchronizations.php' => config_path('synchronizations.php')
+            __DIR__ . '/../../config/synchronizations-1c.php' => config_path('synchronizations-1c.php')
         ], 'config');
-
-        $this->publishes([
-            __DIR__ . '/../../tests' => base_path('tests/synchronizations')
-        ], 'tests');
 
         $this->app->bind('Davron112\Synchronizations\SynchronizationServiceInterface', function ($app) {
             $config  = $app['config']['synchronizations'];
