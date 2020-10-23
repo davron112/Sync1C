@@ -35,6 +35,6 @@ class SynchronizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ProductSynchronizationJobInterface::class, ProductSynchronizationJob::class);
+        //$this->app->bind(ProductSynchronizationJobInterface::class, ProductSynchronizationJob::class);
     }
 }
