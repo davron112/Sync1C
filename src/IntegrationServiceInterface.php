@@ -1,16 +1,16 @@
 <?php
 
-namespace Davron112\Integration1c;
+namespace Davron112\Integrations;
 
 /**
- * Interface Integration1cServiceInterface
- * @package namespace Davron112\Integration1c;
+ * Interface IntegrationserviceInterface
+ * @package namespace Davron112\Integrations;
  *
  * @method Services\OrderService         getOrderService()
  * @method Services\ContactService       getContactService()
  * @method Services\ProductService       getProductService()
  */
-interface Integration1cServiceInterface
+interface IntegrationserviceInterface
 {
     /**
      * Set config

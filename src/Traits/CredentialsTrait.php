@@ -1,10 +1,10 @@
 <?php
 
-namespace Davron112\Integration1c\Traits;
+namespace Davron112\Integrations\Traits;
 
 /**
  * Trait CredentialsTrait
- * @package namespace Davron112\Integration1c\Traits;
+ * @package namespace Davron112\Integrations\Traits;
  */
 trait CredentialsTrait
 {

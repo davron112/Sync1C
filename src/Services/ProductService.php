@@ -1,24 +1,22 @@
 <?php
 
-namespace Davron112\Integration1c\Services;
+namespace Davron112\Integrations\Services;
 
-use Davron112\Integration1c\Services\Interfaces\GetInterface;
-use Davron112\Integration1c\Services\Interfaces\GetAllInterface;
+use Davron112\Integrations\Services\Interfaces\GetInterface;
+use Davron112\Integrations\Services\Interfaces\GetAllInterface;
 
 /**
  * Class ProductService
- * @package namespace Davron112\Integration1c\Services;
+ * @package namespace Davron112\Integrations\Services;
  */
 class ProductService extends BaseService implements GetAllInterface, GetInterface
 {
     /**
      * @var string
      */
-    protected static $listUri = 'Integration/full';
+    protected static $listUri = '/products?active=0';
 
-    protected static $detailUri = 'Integration/info/';
-
-    protected static $changeUri = 'Integration/changed';
+    protected static $detailUri = '/products/info/';
 
     /**
      * Get all products.
@@ -31,20 +29,6 @@ class ProductService extends BaseService implements GetAllInterface, GetInterfac
     }
 
     /**
-     * Get updated products.
-     *
-     * @param int $time delta time
-     *
-     * @return array
-     */
-    public function getUpdated($time)
-    {
-        return $this->getObject(
-            $this->requestService->makeGetRequest($this->getUrl(self::$detailUri . $time))
-        );
-    }
-
-    /**
      * Get specific product by ID.
      *
      * @param int $id product ID
@@ -53,6 +37,6 @@ class ProductService extends BaseService implements GetAllInterface, GetInterfac
      */
     public function get($id)
     {
-        return $this->getObject($this->requestService->makeGetRequest('Integration/full' . $id));
+        return $this->getObject($this->requestService->makeGetRequest(self::$detailUri . $id));
     }
 }

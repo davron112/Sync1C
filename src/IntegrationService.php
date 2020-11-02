@@ -1,20 +1,19 @@
 <?php
 
-namespace Davron112\Integration1c;
+namespace Davron112\Integrations;
 
 use Illuminate\Container\Container;
-use Davron112\Integration1c\Traits\CredentialsTrait;
-use Davron112\Integration1c\Services\RequestService;
+use Davron112\Integrations\Traits\CredentialsTrait;
+use Davron112\Integrations\Services\RequestService;
 
 /**
- * Class Integration1cService
- * @package namespace Davron112\Integration1c;
+ * Class Integrationservice
+ * @package namespace Davron112\Integrations;
  *
  * @method Services\OrderService         getOrderService()
- * @method Services\ContactService       getContactService()
- * @method Services\ProductService getProductService()
+ * @method Services\ProductService       getProductService()
  */
-class Integration1cService implements Integration1cServiceInterface
+class Integrationservice implements IntegrationserviceInterface
 {
     use CredentialsTrait;
 
@@ -103,13 +102,13 @@ class Integration1cService implements Integration1cServiceInterface
      *
      * @param string $serviceName service name
      *
-     * @return Davron112\Integration1c\Services\BaseService
+     * @return Davron112\Integrations\Services\BaseService
      */
     private function getService(string $serviceName)
     {
         $propName = lcfirst($serviceName);
         if (empty($this->$propName)) {
-            $service = $this->container->make('Davron112\Integration1c\Services\\'. $serviceName);
+            $service = $this->container->make('Davron112\Integrations\Services\\'. $serviceName);
             $service->setRequestService($this->requestService);
             $service->setConfig($this->config);
             if (!empty($this->token)) {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Davron112\Integration1c\Services;
+namespace Davron112\Integrations\Services;
 
-use Davron112\Integration1c\Traits\CredentialsTrait;
+use Davron112\Integrations\Traits\CredentialsTrait;
 
 /**
  * Class BaseService
- * @package namespace Davron112\Integration1c\Services;
+ * @package namespace Davron112\Integrations\Services;
  */
 abstract class BaseService
 {
@@ -20,7 +20,7 @@ abstract class BaseService
     private $config;
 
     /**
-     * Response from Integration1c.
+     * Response from Integrations.
      *
      * @var array
      */

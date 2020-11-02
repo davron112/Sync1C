@@ -1,10 +1,10 @@
 <?php
 
-namespace Davron112\Integration1c\Services\Interfaces;
+namespace Davron112\Integrations\Services\Interfaces;
 
 /**
  * Interface GetAllInterface
- * @package namespace Davron112\Integration1c\Services\Interfaces;
+ * @package namespace Davron112\Integrations\Services\Interfaces;
  */
 interface GetAllInterface
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Davron112\Integration1c\Services;
+namespace Davron112\Integrations\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
-use Davron112\Integration1c\Services\Traits\Logger;
+use Logger;
 
 /**
  * Class RequestService
- * @package namespace Davron112\Integration1c\Services;
+ * @package namespace Davron112\Integrations\Services;
  */
 class RequestService
 {
-    use Logger;
 
     /**
      * Guzzle client.
@@ -85,7 +85,7 @@ class RequestService
             $content = $this->responseContent->getBody()->getContents();
             if (strlen($content) > 1) {
                 if ($json) {
-                    return json_decode($content);
+                    return json_decode($content, true);
                 } else {
                     return $content;
                 }
@@ -176,22 +176,27 @@ class RequestService
      */
     private function makeRequest($method, $url, $data, array $requestHeaders)
     {
-        $defaultHeaders = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic ' . base64_encode($this->config['auth']['user'] . ':' . $this->config['auth']['password'])
-            ],
-            'json'           => $data,
-            'decode_content' => false,
-            'http_errors'    => $this->config['show_errors_flag'],
-        ];
-        $fullUrl  = $this->config['base_url'] . $this->config['prefix'] . $url;
+        try {
+            $defaultHeaders = [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic ' . base64_encode($this->config['auth']['user'] . ':' . $this->config['auth']['password'])
+                ],
+                'json'           => $data,
+                'decode_content' => false,
+                'http_errors'    => $this->config['show_errors_flag'],
+            ];
+            $fullUrl  = $this->config['base_url'] . $this->config['prefix'] . $url;
 
-        $headers  = array_replace_recursive($defaultHeaders, $requestHeaders);
-        $response = $this->client->request($method, $fullUrl, $headers, $data);
+            $headers  = array_replace_recursive($defaultHeaders, $requestHeaders);
+            $response = $this->client->request($method, $fullUrl, $headers, $data);
 
-        $this->setResponseContent($response);
-        //$this->log($this->config, $fullUrl, $method, $headers, $response);
+            $this->setResponseContent($response);
+
+        } catch (GuzzleException $e) {
+            //log
+            return [];
+        }
         return $this->obtainResponseContent();
     }
 
@@ -218,6 +223,7 @@ class RequestService
 
         $this->setResponseContent($response);
         //$this->log($this->config, $fullUrl, $method, $headers, $response);
+        dd($this->obtainResponseContent());
         return $this->obtainResponseContent(false);
     }
 }
