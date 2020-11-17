@@ -123,20 +123,6 @@ class RequestService
     }
 
     /**
-     * Make a PATCH request.
-     *
-     * @param string $url request url
-     * @param array $data request data
-     * @param array $requestHeaders request headers
-     *
-     * @return \Guzzle\Psr7\Response
-     */
-    public function makePatchRequest($url, array $data = [], array $requestHeaders = [])
-    {
-        return $this->makeRequest('PATCH', $url, $data, $requestHeaders);
-    }
-
-    /**
      * Make a GET request.
      *
      * @param string $url request url
@@ -198,32 +184,5 @@ class RequestService
             return [];
         }
         return $this->obtainResponseContent();
-    }
-
-    /**
-     * Make a plane HTTP request.
-     *
-     * @param string $method HTTP method
-     * @param string $url request url
-     * @param array $data request data
-     * @param array $requestHeaders request headers
-     *
-     * @return \Guzzle\Psr7\Response
-     */
-    public function makePlaneRequest($method, $url, array $data = [], array $requestHeaders = [])
-    {
-        $defaultHeaders = [
-            'json'           => $data,
-            'decode_content' => false,
-            'http_errors'    => $this->config['show_errors_flag'],
-        ];
-        $fullUrl  = $this->config['base_url'] . $url;
-        $headers  = array_replace_recursive($defaultHeaders, $requestHeaders);
-        $response = $this->client->request($method, $fullUrl, $headers, $data);
-
-        $this->setResponseContent($response);
-        //$this->log($this->config, $fullUrl, $method, $headers, $response);
-        dd($this->obtainResponseContent());
-        return $this->obtainResponseContent(false);
     }
 }

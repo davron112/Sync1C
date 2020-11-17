@@ -3,14 +3,13 @@
 namespace Davron112\Integrations;
 
 /**
- * Interface IntegrationserviceInterface
+ * Interface IntegrationServiceInterface
  * @package namespace Davron112\Integrations;
  *
  * @method Services\OrderService         getOrderService()
- * @method Services\ContactService       getContactService()
  * @method Services\ProductService       getProductService()
  */
-interface IntegrationserviceInterface
+interface IntegrationServiceInterface
 {
     /**
      * Set config

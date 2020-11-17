@@ -13,7 +13,7 @@ use Davron112\Integrations\Services\RequestService;
  * @method Services\OrderService         getOrderService()
  * @method Services\ProductService       getProductService()
  */
-class Integrationservice implements IntegrationserviceInterface
+class IntegrationService implements IntegrationServiceInterface
 {
     use CredentialsTrait;
 
@@ -37,6 +37,11 @@ class Integrationservice implements IntegrationserviceInterface
      * @var string auth token
      */
     protected $token;
+
+    /**
+     * @var Container
+     */
+    protected $container;
 
     /**
      * Set a config
@@ -88,7 +93,6 @@ class Integrationservice implements IntegrationserviceInterface
         $methods = [
             'getProductService',
             'getOrderService',
-            'getContactService',
         ];
         if (in_array($name, $methods)) {
             return $this->getService(substr($name, 3));

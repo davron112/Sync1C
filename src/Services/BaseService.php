@@ -66,18 +66,6 @@ abstract class BaseService
     }
 
     /**
-     * Set a token.
-     *
-     * @param string $token
-     *
-     * @return void
-     */
-    public function setToken(string $token)
-    {
-        $this->token = $token;
-    }
-
-    /**
      * Get a message.
      *
      * @return string|bool message

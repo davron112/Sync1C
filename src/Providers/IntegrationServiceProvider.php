@@ -4,10 +4,9 @@ namespace Davron112\Integrations\Providers;
 
 use Davron112\Integrations\Jobs\ProductSynchronizationJob;
 use Illuminate\Support\ServiceProvider;
-use Davron112\Integrations\Jobs\Contracts\ProductSynchronizationJob as ProductSynchronizationJobInterface;
 
 
-class IntegrationserviceProvider extends ServiceProvider
+class IntegrationServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application services.
