@@ -45,18 +45,7 @@ class RequestService
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Set a config.
-     *
-     * @param array $config contains configuration variables
-     *
-     * @return void
-     */
-    public function setConfig(array $config)
-    {
-        $this->config = $config;
+        $this->config = config('1c');
     }
 
     /**
@@ -173,16 +162,23 @@ class RequestService
                 'http_errors'    => $this->config['show_errors_flag'],
             ];
             $fullUrl  = $this->config['base_url'] . $this->config['prefix'] . $url;
-
             $headers  = array_replace_recursive($defaultHeaders, $requestHeaders);
+
             $response = $this->client->request($method, $fullUrl, $headers, $data);
 
             $this->setResponseContent($response);
+            if ($response->getStatusCode() == 404) {
+                return [
+                    'code' => 50000,
+                    'message' => $this->responseContent->getBody()->getContents()
+                ];
+            }
 
         } catch (GuzzleException $e) {
             //log
             return [];
         }
+
         return $this->obtainResponseContent();
     }
 }

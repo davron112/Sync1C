@@ -60,7 +60,7 @@ abstract class BaseService
      *
      * @return void
      */
-    public function setRequestService(RequestService $requestService)
+    public function __construct(RequestService $requestService)
     {
         $this->requestService = $requestService;
     }
@@ -72,7 +72,7 @@ abstract class BaseService
      */
     public function getMessage()
     {
-        return !empty($this->response['Message'])? $this->response['Message'] : false;
+        return !empty($this->response['message'])? $this->response['message'] : false;
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class BaseService
      */
     public function getStatusCode()
     {
-        return isset($this->response['Code'])? $this->response['Code'] : false;
+        return isset($this->response['code'])? $this->response['code'] : false;
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class BaseService
     protected function checkStatus($response)
     {
         $this->response = $response;
-        return (isset($response['Code']) && Response::ID_RESPONSE_SUCCESS === $response['Code'])? true : false;
+        return (isset($response['code']) && Response::ID_RESPONSE_SUCCESS === $response['code'])? true : false;
     }
 
     /**

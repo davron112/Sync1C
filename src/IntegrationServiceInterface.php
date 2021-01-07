@@ -8,6 +8,7 @@ namespace Davron112\Integrations;
  *
  * @method Services\OrderService         getOrderService()
  * @method Services\ProductService       getProductService()
+ * @method Services\InstalmentService    getInstalmentService()
  */
 interface IntegrationServiceInterface
 {

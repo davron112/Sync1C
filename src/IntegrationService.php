@@ -12,6 +12,7 @@ use Davron112\Integrations\Services\RequestService;
  *
  * @method Services\OrderService         getOrderService()
  * @method Services\ProductService       getProductService()
+ * @method Services\InstalmentService    getInstalmentService()
  */
 class IntegrationService implements IntegrationServiceInterface
 {
@@ -92,6 +93,7 @@ class IntegrationService implements IntegrationServiceInterface
     {
         $methods = [
             'getProductService',
+            'getInstalmentService',
             'getOrderService',
         ];
         if (in_array($name, $methods)) {
